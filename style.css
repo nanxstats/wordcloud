@@ -1,0 +1,83 @@
+body {
+    position: relative;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    width: 960px;
+    margin: auto;
+    margin-bottom: 1em;
+    margin-top: 20px;
+}
+
+#presets a {
+    border-left: solid #666 1px;
+    padding: 0 10px;
+}
+
+#presets a.first {
+    border-left: none;
+}
+
+#keyword {
+    width: 300px;
+}
+
+#fetcher {
+    width: 500px;
+}
+
+#keyword,
+#go {
+    font-size: 1.5em;
+}
+
+#text {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    width: 100%;
+    height: 100px;
+}
+
+p.copy {
+    font-size: small;
+}
+
+#form {
+    font-size: small;
+    position: relative;
+}
+
+hr {
+    border: none;
+    border-bottom: solid #ccc 1px;
+}
+
+a.active {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    cursor: text;
+}
+
+#angles line,
+#angles path,
+#angles circle {
+    stroke: #666;
+}
+
+#angles text {
+    fill: #333;
+}
+
+#angles path.drag {
+    fill: #666;
+    cursor: move;
+}
+
+#angles {
+    text-align: center;
+    margin: 0 auto;
+    width: 350px;
+}
+
+#angles input,
+#max {
+    width: 42px;
+}
