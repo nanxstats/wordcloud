@@ -7,12 +7,11 @@ A fork of <https://www.jasondavies.com/wordcloud/>.
 User-visible changes:
 
 - Add color palette selection feature
-- Use native font stack
 - Change default values
   - `angle-count`: from 5 to 2
   - `angle-from`: from to -90
   - `angle-to`: from to 0
-  - `font`: from "Impact" to "Avenir Next Condensed Medium"
+  - `font`: from "Impact" to a condensed font by operating system
 
 Other quality of life changes:
 
