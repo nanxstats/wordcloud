@@ -28,28 +28,6 @@ function parseText(t) {
     generate();
 }
 function generate() {
-  // Detect OS and set default font
-  var osName = "Unknown";
-  if (window.navigator.userAgent.indexOf("Windows") != -1) osName = "Windows";
-  if (window.navigator.userAgent.indexOf("Mac") != -1) osName = "Mac";
-  if (window.navigator.userAgent.indexOf("Linux") != -1) osName = "Linux";
-
-  var fontInput = document.getElementById("font");
-
-  switch (osName) {
-    case "Mac":
-      fontInput.value = "Avenir Next Condensed Medium";
-      break;
-    case "Windows":
-      fontInput.value = "Segoe UI Semibold";
-      break;
-    case "Linux":
-      fontInput.value = "DejaVu Sans Condensed";
-      break;
-    default:
-      fontInput.value = "Arial";
-  }
-
   layout
     .font(d3.select("#font").property("value"))
     .spiral(d3.select("input[name=spiral]:checked").property("value")),
@@ -708,3 +686,34 @@ d3.select("#random-palette").on("click", function () {
       t(),
       parseText(d3.select("#text").property("value"));
   })();
+
+// Call the setup function when the page loads
+window.onload = setup;
+
+function setDefaultFont() {
+  var osName = "Unknown";
+  if (window.navigator.userAgent.indexOf("Windows") != -1) osName = "Windows";
+  if (window.navigator.userAgent.indexOf("Mac") != -1) osName = "Mac";
+  if (window.navigator.userAgent.indexOf("Linux") != -1) osName = "Linux";
+
+  var fontInput = document.getElementById("font");
+
+  switch (osName) {
+    case "Mac":
+      fontInput.value = "Avenir Next Condensed Medium";
+      break;
+    case "Windows":
+      fontInput.value = "Segoe UI Semibold";
+      break;
+    case "Linux":
+      fontInput.value = "DejaVu Sans Condensed";
+      break;
+    default:
+      fontInput.value = "Arial";
+  }
+}
+
+function setup() {
+  setDefaultFont();
+  generate();
+}
