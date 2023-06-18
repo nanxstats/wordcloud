@@ -4,7 +4,7 @@ A fork of <https://www.jasondavies.com/wordcloud/>.
 
 ## Changeset
 
-These user-visible changes are made from the original version:
+User-visible changes:
 
 - Add color palette selection feature
 - Use native font stack
@@ -14,7 +14,7 @@ These user-visible changes are made from the original version:
   - `angle-to`: from to 0
   - `font`: from "Impact" to "Avenir Next Condensed Medium"
 
-Other quality of life updates:
+Other quality of life changes:
 
 - Fix HTML structure, isolate inline CSS styles into a separate file
 - Upgrade d3 version to 3.5.17
