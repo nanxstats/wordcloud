@@ -12,6 +12,7 @@ User-visible changes:
   - `angle-from`: from to -90
   - `angle-to`: from to 0
   - `font`: from "Impact" to a condensed font by operating system
+- Use native font stack for the UI
 
 Other quality of life changes:
 
