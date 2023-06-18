@@ -1,3 +1,98 @@
+// Define reversed versions of D3.js categorical color scales
+let category10 = [
+  "#1F77B4",
+  "#FF7F0E",
+  "#2CA02C",
+  "#D62728",
+  "#9467BD",
+  "#8C564B",
+  "#E377C2",
+  "#7F7F7F",
+  "#BCBD22",
+  "#17BECF",
+];
+d3.scale.category10Reversed = function () {
+  return d3.scale.ordinal().range(category10.slice().reverse());
+};
+
+let category20 = [
+  "#1F77B4",
+  "#FF7F0E",
+  "#2CA02C",
+  "#D62728",
+  "#9467BD",
+  "#8C564B",
+  "#E377C2",
+  "#7F7F7F",
+  "#BCBD22",
+  "#17BECF",
+  "#AEC7E8",
+  "#FFBB78",
+  "#98DF8A",
+  "#FF9896",
+  "#C5B0D5",
+  "#C49C94",
+  "#F7B6D2",
+  "#C7C7C7",
+  "#DBDB8D",
+  "#9EDAE5",
+];
+d3.scale.category20Reversed = function () {
+  return d3.scale.ordinal().range(category20.slice().reverse());
+};
+
+let category20b = [
+  "#393B79",
+  "#637939",
+  "#8C6D31",
+  "#843C39",
+  "#7B4173",
+  "#5254A3",
+  "#8CA252",
+  "#BD9E39",
+  "#AD494A",
+  "#A55194",
+  "#6B6ECF",
+  "#B5CF6B",
+  "#E7BA52",
+  "#D6616B",
+  "#CE6DBD",
+  "#9C9EDE",
+  "#CEDB9C",
+  "#E7CB94",
+  "#E7969C",
+  "#DE9ED6",
+];
+d3.scale.category20bReversed = function () {
+  return d3.scale.ordinal().range(category20b.slice().reverse());
+};
+
+let category20c = [
+  "#3182BD",
+  "#E6550D",
+  "#31A354",
+  "#756BB1",
+  "#636363",
+  "#6BAED6",
+  "#FD8D3C",
+  "#74C476",
+  "#9E9AC8",
+  "#969696",
+  "#9ECAE1",
+  "#FDAE6B",
+  "#A1D99B",
+  "#BCBDDC",
+  "#BDBDBD",
+  "#C6DBEF",
+  "#FDD0A2",
+  "#C7E9C0",
+  "#DADAEB",
+  "#D9D9D9",
+];
+d3.scale.category20cReversed = function () {
+  return d3.scale.ordinal().range(category20c.slice().reverse());
+};
+
 // Define custom D3.js categorical color palettes
 
 // viridis color scale
@@ -90,4 +185,88 @@ d3.scale.gephi = function () {
 };
 d3.scale.gephiReversed = function () {
   return d3.scale.ordinal().range(gephi.slice().reverse());
+};
+
+// ColorBrewer dark2 color scale
+let dark2 = [
+  "#1b9e77",
+  "#d95f02",
+  "#7570b3",
+  "#e7298a",
+  "#66a61e",
+  "#e6ab02",
+  "#a6761d",
+];
+d3.scale.dark2 = function () {
+  return d3.scale.ordinal().range(dark2);
+};
+d3.scale.dark2Reversed = function () {
+  return d3.scale.ordinal().range(dark2.slice().reverse());
+};
+
+// ColorBrewer set2 color scale
+let set2 = [
+  "#66c2a5",
+  "#fc8d62",
+  "#8da0cb",
+  "#e78ac3",
+  "#a6d854",
+  "#ffd92f",
+  "#e5c494",
+];
+d3.scale.set2 = function () {
+  return d3.scale.ordinal().range(set2);
+};
+d3.scale.set2Reversed = function () {
+  return d3.scale.ordinal().range(set2.slice().reverse());
+};
+
+// ggplot2 hue color scale
+let ggplot2 = [
+  "#F8766D",
+  "#EA8331",
+  "#D89000",
+  "#C09B00",
+  "#A3A500",
+  "#7CAE00",
+  "#39B600",
+  "#00BB4E",
+  "#00BF7D",
+  "#00C1A3",
+  "#00BFC4",
+  "#00BAE0",
+  "#00B0F6",
+  "#35A2FF",
+  "#9590FF",
+  "#C77CFF",
+  "#E76BF3",
+  "#FA62DB",
+  "#FF62BC",
+  "#FF6A98",
+];
+d3.scale.ggplot2 = function () {
+  return d3.scale.ordinal().range(ggplot2);
+};
+d3.scale.ggplot2Reversed = function () {
+  return d3.scale.ordinal().range(ggplot2.slice().reverse());
+};
+
+// Tableau 10 color scale
+let tableau10 = [
+  "#4e79a7",
+  "#f28e2c",
+  "#e15759",
+  "#76b7b2",
+  "#59a14f",
+  "#edc949",
+  "#af7aa1",
+  "#ff9da7",
+  "#9c755f",
+  "#bab0ab",
+];
+d3.scale.tableau10 = function () {
+  return d3.scale.ordinal().range(tableau10);
+};
+d3.scale.tableau10Reversed = function () {
+  return d3.scale.ordinal().range(tableau10.slice().reverse());
 };
