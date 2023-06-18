@@ -19,7 +19,9 @@
         <div style="text-align: center">
             <div id="presets"></div>
             <div id="custom-area">
-                <p><label for="text">Paste your text below!</label>
+                <p>
+                    <label for="text">Paste your text below!</label>
+                </p>
                 <p>
                     <textarea id="text">
     How the Word Cloud Generator Works
@@ -52,35 +54,53 @@
 
     Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block.
     </textarea>
-                    <button id="go" type="submit">Go!</button>
+                </p>
+                <button id="go" type="submit">Go!</button>
             </div>
         </div>
 
         <hr>
 
         <div style="float: right; text-align: right">
-            <p><label for="max">Number of words:</label> <input type="number" value="250" min="1" id="max">
-            <p><label for="per-line"><input type="checkbox" id="per-line"> One word per line</label>
-                <!--<p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a>-->
-            <p><label>Download:</label>
-                <button id="download-svg">SVG</button><!-- |
-        <a id="download-png" href="#">PNG</a>-->
+            <p>
+                <label for="max">Number of words:</label>
+                <input type="number" value="250" min="1" id="max">
+            </p>
+            <p>
+                <label for="per-line">
+                    <input type="checkbox" id="per-line"> One word per line
+                </label>
+            </p>
+            <!--<p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a></p>-->
+            <p>
+                <label>Download:</label>
+                <button id="download-svg">SVG</button>
+                <!-- | <a id="download-png" href="#">PNG</a>-->
+            </p>
         </div>
 
         <div style="float: left">
-            <p><label>Spiral:</label>
+            <p>
+                <label>Spiral:</label>
                 <label for="archimedean"><input type="radio" name="spiral" id="archimedean" value="archimedean"
                         checked="checked"> Archimedean</label>
                 <label for="rectangular"><input type="radio" name="spiral" id="rectangular" value="rectangular">
                     Rectangular</label>
-            <p><label for="scale">Scale:</label>
+            </p>
+            <p>
+                <label for="scale">Scale:</label>
                 <label for="scale-log"><input type="radio" name="scale" id="scale-log" value="log" checked="checked">
                     log
                     n</label>
                 <label for="scale-sqrt"><input type="radio" name="scale" id="scale-sqrt" value="sqrt"> √n</label>
                 <label for="scale-linear"><input type="radio" name="scale" id="scale-linear" value="linear"> n</label>
-            <p><label for="font">Font:</label> <input type="text" id="font" value="Arial">
-            <p><label for="font">Color palette:</label>
+            </p>
+            <p>
+                <label for="font">Font:</label>
+                <input type="text" id="font" value="Arial">
+            </p>
+            <p>
+                <label for="font">Color palette:</label>
                 <select id="color-palette">
                     <option value="viridis">viridis</option>
                     <option value="viridisReversed">viridis reversed</option>
@@ -95,18 +115,26 @@
         </div>
 
         <div id="angles">
-            <p><input type="number" id="angle-count" value="2" min="1"> <label for="angle-count">orientations</label>
+            <p>
+                <input type="number" id="angle-count" value="2" min="1">
+                <label for="angle-count">orientations</label>
                 <label for="angle-from">from</label> <input type="number" id="angle-from" value="-90" min="-90"
                     max="90"> °
                 <label for="angle-to">to</label> <input type="number" id="angle-to" value="0" min="-90" max="90"> °
+            </p>
         </div>
 
         <hr style="clear: both">
 
-        <p style="float: right"><a href="about/">How the Word Cloud Generator Works</a>.
-        <p style="float: left">Copyright &copy; <a href="http://www.jasondavies.com/">Jason Davies</a> | <a
-                href="../privacy/">Privacy Policy</a>. The generated word clouds may be used for any purpose.
-
+        <p style="float: right">
+            <a href="about/">How the Word Cloud Generator Works</a>.
+        </p>
+        <p style="float: left">
+            Copyright &copy;
+            <a href="http://www.jasondavies.com/">Jason Davies</a> |
+            <a href="../privacy/">Privacy Policy</a>.
+            The generated word clouds may be used for any purpose.
+        </p>
     </form>
 
     <script src="d3.min.js"></script>
