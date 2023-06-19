@@ -1,4 +1,4 @@
-# wordcloud
+# Word cloud generator but enhanced
 
 A fork of <https://www.jasondavies.com/wordcloud/> for generating word cloud visualizations.
 
