@@ -717,10 +717,10 @@ function setDefaultFont() {
       fontInput.value = "Avenir Next Condensed Medium";
       break;
     case "Windows":
-      fontInput.value = "Segoe UI Semibold";
+      fontInput.value = "Franklin Gothic Medium";
       break;
     case "Linux":
-      fontInput.value = "DejaVu Sans Condensed";
+      fontInput.value = "Liberation Sans Bold";
       break;
     default:
       fontInput.value = "Arial";
