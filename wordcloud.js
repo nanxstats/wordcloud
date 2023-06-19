@@ -141,16 +141,30 @@ function downloadPNG() {
     echoForm.node().submit();
 }
 function downloadSVG() {
-  d3.event.preventDefault(),
-    echoContentType.attr("value", "image/svg+xml;charset=utf-8"),
-    echoInput.attr(
-      "value",
-      svg
-        .attr("version", "1.1")
-        .attr("xmlns", "http://www.w3.org/2000/svg")
-        .node().parentNode.innerHTML
-    ),
-    echoForm.node().submit();
+  var html = d3
+    .select("svg")
+    .attr("version", 1.1)
+    .attr("xmlns", "http://www.w3.org/2000/svg")
+    .node().parentNode.innerHTML;
+
+  // Create a data URL string
+  var imgsrc = "data:image/svg+xml;base64," + btoa(html);
+
+  // Create a new anchor element and set the href to the data URL
+  var a = document.createElement("a");
+  a.href = imgsrc;
+
+  // Set the download attribute so clicking it will download the file
+  a.download = "wordcloud.svg";
+
+  // Append the anchor to the body
+  document.body.appendChild(a);
+
+  // Programmatically click the anchor to start the download
+  a.click();
+
+  // Clean up by removing the anchor from the body
+  document.body.removeChild(a);
 }
 !(function (t) {
   function e() {
@@ -504,7 +518,7 @@ var unicodePunctuationRe =
     })
     .on("word", progress)
     .on("end", draw),
-  echoForm = d3
+  /*   echoForm = d3
     .select("body")
     .append("form")
     .attr("action", "https://www.jasondavies.com/echo")
@@ -517,7 +531,7 @@ var unicodePunctuationRe =
   echoInput = echoForm
     .append("input")
     .attr("type", "hidden")
-    .attr("name", "echo"),
+    .attr("name", "echo"), */
   svg = d3.select("#vis").append("svg").attr("width", w).attr("height", h),
   background = svg.append("g"),
   vis = svg
