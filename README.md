@@ -1,8 +1,8 @@
 # wordcloud
 
-A fork of <https://www.jasondavies.com/wordcloud/>.
+A fork of <https://www.jasondavies.com/wordcloud/> for generating word cloud visualizations.
 
-## Changeset
+## Changelog
 
 User-visible changes:
 
