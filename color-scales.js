@@ -270,3 +270,20 @@ d3.scale.tableau10 = function () {
 d3.scale.tableau10Reversed = function () {
   return d3.scale.ordinal().range(tableau10.slice().reverse());
 };
+
+// FlatUI color scale
+let flatUI = [
+  "#c0392b",
+  "#d35400",
+  "#f39c12",
+  "#27ae60",
+  "#16a085",
+  "#2980b9",
+  "#8e44ad",
+];
+d3.scale.flatUI = function () {
+  return d3.scale.ordinal().range(flatUI);
+};
+d3.scale.flatUIReversed = function () {
+  return d3.scale.ordinal().range(flatUI.slice().reverse());
+};
