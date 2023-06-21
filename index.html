@@ -5,171 +5,208 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Word Cloud Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+        integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="container py-3">
 
-    <div id="vis"></div>
+    <div id="vis" class="mx-auto" style="width: 960px;"></div>
 
     <form id="form">
 
-        <p style="position: absolute; right: 0; top: 0" id="status"></p>
+        <p id="status" class="position-absolute top-0 end-0"></p>
 
-        <div style="text-align: center">
-            <div id="presets"></div>
+        <div class="text-center mb-4">
+            <div id="presets" class="mb-4"></div>
             <div id="custom-area">
-                <p>
-                    <label for="text">Paste your text below!</label>
+                <p class="mb-2">
+                    <label for="text" class="form-label">Paste your text below!</label>
                 </p>
                 <p>
-                    <textarea id="text">
-    How the Word Cloud Generator Works
+                    <textarea id="text" class="form-control" rows="3">
+How the Word Cloud Generator Works
 
-    The layout algorithm for positioning words without overlap is available on GitHub under an open source license as d3-cloud. Note that this is the only the layout algorithm and any code for converting text into words and rendering the final output requires additional development.
+The layout algorithm for positioning words without overlap is available on GitHub under an open source license as d3-cloud. Note that this is the only the layout algorithm and any code for converting text into words and rendering the final output requires additional development.
 
-    As word placement can be quite slow for more than a few hundred words, the layout algorithm can be run asynchronously, with a configurable time step size. This makes it possible to animate words as they are placed without stuttering. It is recommended to always use a time step even without animations as it prevents the browser’s event loop from blocking while placing the words.
+As word placement can be quite slow for more than a few hundred words, the layout algorithm can be run asynchronously, with a configurable time step size. This makes it possible to animate words as they are placed without stuttering. It is recommended to always use a time step even without animations as it prevents the browser’s event loop from blocking while placing the words.
 
-    The layout algorithm itself is incredibly simple. For each word, starting with the most “important”:
+The layout algorithm itself is incredibly simple. For each word, starting with the most “important”:
 
-    Attempt to place the word at some starting point: usually near the middle, or somewhere on a central horizontal line.
-    If the word intersects with any previously placed words, move it one step along an increasing spiral. Repeat until no intersections are found.
-    The hard part is making it perform efficiently! According to Jonathan Feinberg, Wordle uses a combination of hierarchical bounding boxes and quadtrees to achieve reasonable speeds.
+Attempt to place the word at some starting point: usually near the middle, or somewhere on a central horizontal line.
+If the word intersects with any previously placed words, move it one step along an increasing spiral. Repeat until no intersections are found.
+The hard part is making it perform efficiently! According to Jonathan Feinberg, Wordle uses a combination of hierarchical bounding boxes and quadtrees to achieve reasonable speeds.
 
-    Glyphs in JavaScript
+Glyphs in JavaScript
 
-    There isn’t a way to retrieve precise glyph shapes via the DOM, except perhaps for SVG fonts. Instead, we draw each word to a hidden canvas element, and retrieve the pixel data.
+There isn’t a way to retrieve precise glyph shapes via the DOM, except perhaps for SVG fonts. Instead, we draw each word to a hidden canvas element, and retrieve the pixel data.
 
-    Retrieving the pixel data separately for each word is expensive, so we draw as many words as possible and then retrieve their pixels in a batch operation.
+Retrieving the pixel data separately for each word is expensive, so we draw as many words as possible and then retrieve their pixels in a batch operation.
 
-    Sprites and Masks
+Sprites and Masks
 
-    My initial implementation performed collision detection using sprite masks. Once a word is placed, it doesn't move, so we can copy it to the appropriate position in a larger sprite representing the whole placement area.
+My initial implementation performed collision detection using sprite masks. Once a word is placed, it doesn't move, so we can copy it to the appropriate position in a larger sprite representing the whole placement area.
 
-    The advantage of this is that collision detection only involves comparing a candidate sprite with the relevant area of this larger sprite, rather than comparing with each previous word separately.
+The advantage of this is that collision detection only involves comparing a candidate sprite with the relevant area of this larger sprite, rather than comparing with each previous word separately.
 
-    Somewhat surprisingly, a simple low-level hack made a tremendous difference: when constructing the sprite I compressed blocks of 32 1-bit pixels into 32-bit integers, thus reducing the number of checks (and memory) by 32 times.
+Somewhat surprisingly, a simple low-level hack made a tremendous difference: when constructing the sprite I compressed blocks of 32 1-bit pixels into 32-bit integers, thus reducing the number of checks (and memory) by 32 times.
 
-    In fact, this turned out to beat my hierarchical bounding box with quadtree implementation on everything I tried it on (even very large areas and font sizes). I think this is primarily because the sprite version only needs to perform a single collision test per candidate area, whereas the bounding box version has to compare with every other previously placed word that overlaps slightly with the candidate area.
+In fact, this turned out to beat my hierarchical bounding box with quadtree implementation on everything I tried it on (even very large areas and font sizes). I think this is primarily because the sprite version only needs to perform a single collision test per candidate area, whereas the bounding box version has to compare with every other previously placed word that overlaps slightly with the candidate area.
 
-    Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block.
-    </textarea>
+Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block.
+                    </textarea>
                 </p>
-                <button id="go" type="submit">Go!</button>
+                <button id="go" type="submit" class="btn btn-lg btn-secondary">Go!</button>
             </div>
         </div>
 
-        <hr>
+        <hr class="my-4">
 
-        <div style="float: right; text-align: right">
-            <p>
-                <label for="max">Number of words:</label>
-                <input type="number" value="250" min="1" id="max">
-            </p>
-            <p>
-                <label for="per-line">
-                    <input type="checkbox" id="per-line"> One word per line
-                </label>
-            </p>
-            <!--<p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a></p>-->
-            <p>
-                <label>Download:</label>
-                <button id="download-svg">SVG</button>
-                <!-- | <a id="download-png" href="#">PNG</a>-->
-            </p>
+        <div class="row">
+            <div class="col">
+                <!-- Left-side Form Inputs -->
+                <div class="d-flex align-items-center mb-3">
+                    <label for="color-palette" class="form-label me-2">Color:</label>
+                    <select id="color-palette" class="form-select" aria-label="Select color palette">
+                        <optgroup label="Tableau Palettes">
+                            <option value="tableau10">New Tableau 10</option>
+                            <option value="tableau10Reversed">New Tableau 10 (Reversed)</option>
+                        </optgroup>
+                        <optgroup label="Viridis Palettes">
+                            <option value="viridis">Viridis</option>
+                            <option value="viridisReversed">Viridis (Reversed)</option>
+                        </optgroup>
+                        <optgroup label="ColorBrewer Palettes">
+                            <option value="dark2">ColorBrewer Dark2</option>
+                            <option value="dark2Reversed">ColorBrewer Dark2 (Reversed)</option>
+                            <option value="set2">ColorBrewer Set2</option>
+                            <option value="set2Reversed">ColorBrewer Set2 (Reversed)</option>
+                        </optgroup>
+                        <optgroup label="ggplot2 Palettes">
+                            <option value="ggplot2">ggplot2 Hue</option>
+                            <option value="ggplot2Reversed">ggplot2 Hue (Reversed)</option>
+                        </optgroup>
+                        <optgroup label="D3 Palettes">
+                            <option value="category10">D3 Category 10</option>
+                            <option value="category10Reversed">D3 Category 10 (Reversed)</option>
+                            <option value="category20">D3 Category 20</option>
+                            <option value="category20Reversed">D3 Category 20 (Reversed)</option>
+                            <option value="category20b">D3 Category 20b</option>
+                            <option value="category20bReversed">D3 Category 20b (Reversed)</option>
+                            <option value="category20c">D3 Category 20c</option>
+                            <option value="category20cReversed">D3 Category 20c (Reversed)</option>
+                        </optgroup>
+                        <optgroup label="Other Palettes">
+                            <option value="okabeIto">Okabe-Ito</option>
+                            <option value="okabeItoReversed">Okabe-Ito (Reversed)</option>
+                            <option value="gephi">Gephi</option>
+                            <option value="gephiReversed">Gephi (Reversed)</option>
+                            <option value="flatUI">FlatUI</option>
+                            <option value="flatUIReversed">FlatUI (Reversed)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <label for="font" class="form-label me-2">Font:</label>
+                    <input type="text" id="font" value="Arial" style="min-width: 30ch;" class="form-control">
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <label class="me-2">Spiral:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="spiral" id="archimedean" value="archimedean"
+                            checked>
+                        <label class="form-check-label" for="archimedean">Archimedean</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="spiral" id="rectangular" value="rectangular">
+                        <label class="form-check-label" for="rectangular">Rectangular</label>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <label class="me-2">Scale:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scale" id="scale-log" value="log" checked>
+                        <label class="form-check-label" for="scale-log">log n</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scale" id="scale-sqrt" value="sqrt">
+                        <label class="form-check-label" for="scale-sqrt">√n</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scale" id="scale-linear" value="linear">
+                        <label class="form-check-label" for="scale-linear">n</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+                <!-- Center Form Inputs -->
+                <div id="angles">
+                    <div class="form-floating mb-3">
+                        <input type="number" id="angle-count" value="2" min="1" class="form-control">
+                        <label for="angle-count">Number of orientations:</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="number" id="angle-from" value="-90" min="-90" max="90" class="form-control">
+                        <label for="angle-from">From:</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="number" id="angle-to" value="0" min="-90" max="90" class="form-control">
+                        <label for="angle-to">To:</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <!-- Right-side Form Inputs -->
+                <div class="form-floating mb-3">
+                    <input type="number" value="250" min="1" id="max" class="form-control">
+                    <label for="max">Number of words:</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="per-line">
+                    <label class="form-check-label" for="per-line">One word per line</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>Download:</label>
+                    <button id="download-svg" class="btn btn-sm btn-outline-secondary">SVG</button>
+                </div>
+            </div>
         </div>
+    </form>
 
-        <div style="float: left">
-            <p>
-                <label>Spiral:</label>
-                <label for="archimedean"><input type="radio" name="spiral" id="archimedean" value="archimedean"
-                        checked="checked"> Archimedean</label>
-                <label for="rectangular"><input type="radio" name="spiral" id="rectangular" value="rectangular">
-                    Rectangular</label>
-            </p>
-            <p>
-                <label for="scale">Scale:</label>
-                <label for="scale-log"><input type="radio" name="scale" id="scale-log" value="log" checked="checked">
-                    log
-                    n</label>
-                <label for="scale-sqrt"><input type="radio" name="scale" id="scale-sqrt" value="sqrt"> √n</label>
-                <label for="scale-linear"><input type="radio" name="scale" id="scale-linear" value="linear"> n</label>
-            </p>
-            <p>
-                <label for="font">Font:</label>
-                <input type="text" id="font" value="Arial" style="min-width: 30ch;">
-            </p>
-            <p>
-                <label for="font">Color palette:</label>
-                <select id="color-palette">
-                    <optgroup label="Tableau Palettes">
-                        <option value="tableau10">New Tableau 10</option>
-                        <option value="tableau10Reversed">New Tableau 10 (Reversed)</option>
-                    </optgroup>
-                    <optgroup label="Viridis Palettes">
-                        <option value="viridis">Viridis</option>
-                        <option value="viridisReversed">Viridis (Reversed)</option>
-                    </optgroup>
-                    <optgroup label="ColorBrewer Palettes">
-                        <option value="dark2">ColorBrewer Dark2</option>
-                        <option value="dark2Reversed">ColorBrewer Dark2 (Reversed)</option>
-                        <option value="set2">ColorBrewer Set2</option>
-                        <option value="set2Reversed">ColorBrewer Set2 (Reversed)</option>
-                    </optgroup>
-                    <optgroup label="ggplot2 Palettes">
-                        <option value="ggplot2">ggplot2 Hue</option>
-                        <option value="ggplot2Reversed">ggplot2 Hue (Reversed)</option>
-                    </optgroup>
-                    <optgroup label="D3 Palettes">
-                        <option value="category10">D3 Category 10</option>
-                        <option value="category10Reversed">D3 Category 10 (Reversed)</option>
-                        <option value="category20">D3 Category 20</option>
-                        <option value="category20Reversed">D3 Category 20 (Reversed)</option>
-                        <option value="category20b">D3 Category 20b</option>
-                        <option value="category20bReversed">D3 Category 20b (Reversed)</option>
-                        <option value="category20c">D3 Category 20c</option>
-                        <option value="category20cReversed">D3 Category 20c (Reversed)</option>
-                    </optgroup>
-                    <optgroup label="Other Palettes">
-                        <option value="okabeIto">Okabe-Ito</option>
-                        <option value="okabeItoReversed">Okabe-Ito (Reversed)</option>
-                        <option value="gephi">Gephi</option>
-                        <option value="gephiReversed">Gephi (Reversed)</option>
-                        <option value="flatUI">FlatUI</option>
-                        <option value="flatUIReversed">FlatUI (Reversed)</option>
-                    </optgroup>
-                </select>
-            </p>
-        </div>
+    <hr class="clear-both my-4">
 
-        <div id="angles">
-            <p>
-                <input type="number" id="angle-count" value="2" min="1">
-                <label for="angle-count">orientations</label>
-                <label for="angle-from">from</label> <input type="number" id="angle-from" value="-90" min="-90"
-                    max="90"> °
-                <label for="angle-to">to</label> <input type="number" id="angle-to" value="0" min="-90" max="90"> °
-            </p>
-        </div>
+    <div class="text-secondary">
 
-        <hr style="clear: both">
-
-        <p style="float: right">
-            <a href="https://www.jasondavies.com/wordcloud/about/">How the Word Cloud Generator Works</a>.
-        </p>
-        <p style="float: left">
+        <p class="float-start">
             Copyright &copy;
-            <a href="http://www.jasondavies.com/">Jason Davies</a> |
-            <a href="https://www.jasondavies.com/privacy/">Privacy Policy</a>.
+            <a href="http://www.jasondavies.com/" class="text-primary">Jason Davies</a> |
+            <a href="https://www.jasondavies.com/privacy/" class="text-primary">Privacy Policy</a>.
             The generated word clouds may be used for any purpose.
         </p>
+        <p class="float-end">
+            <a href="https://www.jasondavies.com/wordcloud/about/" class="text-primary">How the Word Cloud Generator
+                Works</a>.
+        </p>
 
-        <p style="float: left">
+        <p class="float-start mt-2">
             This application is a fork of the original implementation by Jason Davies. The current version, which
             includes additional features and revised defaults, was modified and updated by <a href="http://nanx.me">Nan
                 Xiao</a>. You can view the source code on <a href="https://github.com/nanxstats/wordcloud">GitHub</a>.
         </p>
-    </form>
+
+    </div>
 
     <script src="d3.min.js"></script>
     <script src="color-scales.js"></script>
