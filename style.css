@@ -1,14 +1,117 @@
+/* Textarea input */
 #text {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-textarea,
-input,
-button,
-select {
-    border-width: 2px !important;
+/* Text input */
+.form-control {
+    border: 1px solid #a0aec0;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
 }
 
+.form-control:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 0.2rem rgba(99, 179, 237, .25);
+    outline: none;
+}
+
+@media (min-width: 640px) {
+    .form-control {
+        font-size: .875rem;
+    }
+}
+
+/* Select input */
+.form-select {
+    position: relative;
+    width: 100%;
+    cursor: default;
+    border-radius: .25rem;
+    background-color: #ffffff;
+    text-align: left;
+    color: #2d3748;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    border: 1px solid #a0aec0;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 0.2rem rgba(99, 179, 237, .25);
+}
+
+@media (min-width: 640px) {
+    .form-select {
+        font-size: .875rem;
+        line-height: 1.5;
+    }
+}
+
+/* Radio button and checkbox */
+.form-check-input:checked {
+    background-color: #63b3ed;
+    border-color: #63b3ed;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(99, 179, 237, .5);
+}
+
+/* Button */
+.custom-btn-primary {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+    color: #ffffff;
+    font-weight: bold;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+.custom-btn-primary:hover {
+    background-color: #0284c7;
+    border-color: #0284c7;
+    color: #ffffff;
+}
+
+:not(.btn-check)+.btn:active {
+    background-color: #0369a1;
+    border-color: #0369a1;
+}
+
+.custom-btn-outline {
+    background-color: #ffffff;
+    color: #2d3748;
+    padding: .5rem 1rem;
+    border: 1px solid #cbd5e0;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+.custom-btn-outline:hover {
+    border-color: #63b3ed;
+    background-color: #f7fafc;
+    color: #2d3748;
+}
+
+.btn:first-child:active {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+}
+
+/* Link */
+a {
+    transition: all 0.1s;
+    color: #718096;
+}
+
+a:hover {
+    transform: translateX(2px);
+    color: #2D3748;
+}
+
+/* Angles diagram */
 #angles line,
 #angles path,
 #angles circle {

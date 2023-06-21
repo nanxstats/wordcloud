@@ -28,6 +28,7 @@ User-visible changes:
 Other quality of life changes:
 
 - Refactor HTML UI with Bootstrap 5.
+- Apply Tailwind CSS look and feel for UI components.
 - Fix HTML structure, isolate inline CSS styles into a separate file.
 - Refactor the SVG download feature with pure client-side solution.
 - Upgrade d3 version to 3.5.17.
