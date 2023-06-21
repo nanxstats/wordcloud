@@ -14,6 +14,7 @@ User-visible changes:
   - D3
   - Okabe-Ito
   - Gephi
+  - FlatUI
 - Update the default word cloud typeface from Impact to a font based on user's operating system.
   - macOS: Avenir Next Condensed Medium
   - Windows: Franklin Gothic Medium
@@ -26,6 +27,7 @@ User-visible changes:
 
 Other quality of life changes:
 
+- Refactor HTML UI with Bootstrap 5.
 - Fix HTML structure, isolate inline CSS styles into a separate file.
 - Refactor the SVG download feature with pure client-side solution.
 - Upgrade d3 version to 3.5.17.
