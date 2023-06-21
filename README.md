@@ -2,6 +2,8 @@
 
 A fork of <https://www.jasondavies.com/wordcloud/> for generating word cloud visualizations.
 
+Blog post: <https://nanx.me/blog/post/rethinking-word-cloud-generator/>
+
 ## Changelog
 
 User-visible changes:
