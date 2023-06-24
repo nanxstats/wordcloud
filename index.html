@@ -75,7 +75,9 @@ In fact, this turned out to beat my hierarchical bounding box with quadtree impl
 Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block.
                     </textarea>
                 </p>
-                <button id="go" type="submit" class="btn btn-primary custom-btn-primary">Refresh Word Cloud</button>
+                <button id="go" type="submit" class="btn btn-primary custom-btn-primary me-3">Refresh Word
+                    Cloud</button>
+                <button id="download-svg" class="btn btn-outline-secondary custom-btn-outline">Download SVG</button>
             </div>
         </div>
 
@@ -84,8 +86,7 @@ Another possibility would be to merge a word’s tree with a single large tree o
         <div class="row">
             <div class="col">
                 <!-- Left-side Form Inputs -->
-                <div class="d-flex align-items-center mb-3">
-                    <label for="color-palette" class="form-label me-2">Color:</label>
+                <div class="form-floating mb-3">
                     <select id="color-palette" class="form-select" aria-label="Select color palette">
                         <optgroup label="Tableau Palettes">
                             <option value="tableau10">New Tableau 10</option>
@@ -124,11 +125,12 @@ Another possibility would be to merge a word’s tree with a single large tree o
                             <option value="flatUIReversed">FlatUI (Reversed)</option>
                         </optgroup>
                     </select>
+                    <label for="color-palette">Color:</label>
                 </div>
 
-                <div class="d-flex align-items-center mb-3">
-                    <label for="font" class="form-label me-2">Font:</label>
+                <div class="form-floating mb-3">
                     <input type="text" id="font" value="Arial" style="min-width: 30ch;" class="form-control">
+                    <label for="font">Font:</label>
                 </div>
 
                 <div class="d-flex align-items-center mb-3">
@@ -189,13 +191,9 @@ Another possibility would be to merge a word’s tree with a single large tree o
                     <label for="max">Number of words:</label>
                 </div>
 
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="per-line">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" role="switch" id="per-line">
                     <label class="form-check-label" for="per-line">One word per line</label>
-                </div>
-
-                <div class="mb-3">
-                    <button id="download-svg" class="btn btn-outline-secondary custom-btn-outline">Download SVG</button>
                 </div>
             </div>
         </div>
