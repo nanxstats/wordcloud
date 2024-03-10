@@ -20,7 +20,7 @@ User-visible changes:
 - Update the default word cloud typeface from Impact to a font based on user's operating system.
   - macOS: Avenir Next Condensed
   - Windows: Franklin Gothic Medium
-  - Linux: Liberation Sans Bold
+  - Linux: Liberation Sans
 - Update the default values for graphical parameter inputs:
   - `angle-count`: from 5 to 2.
   - `angle-from`: from -60 to -90.

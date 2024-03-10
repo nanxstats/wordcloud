@@ -720,7 +720,7 @@ function setDefaultFont() {
       fontInput.value = "Franklin Gothic Medium";
       break;
     case "Linux":
-      fontInput.value = "Liberation Sans Bold";
+      fontInput.value = "Liberation Sans";
       break;
     default:
       fontInput.value = "Arial";
