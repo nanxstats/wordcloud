@@ -714,7 +714,7 @@ function setDefaultFont() {
 
   switch (osName) {
     case "Mac":
-      fontInput.value = "Avenir Next Condensed Medium";
+      fontInput.value = "Avenir Next Condensed";
       break;
     case "Windows":
       fontInput.value = "Franklin Gothic Medium";
